@@ -76,7 +76,7 @@ function QuestionList({ formData, onCreateLink }) {
                     <Loader2Icon className='animate-spin' />
                     <div>
                         <h2 className='font-medium'>Generating Interview Questions</h2>
-                        <p className='text-primary'>Our AI is crafting personalized questions bases on your job position</p>
+                        <p className='text-primary'>Our AI is crafting personalized questions based on your job position</p>
                     </div>
                 </div>
             }
