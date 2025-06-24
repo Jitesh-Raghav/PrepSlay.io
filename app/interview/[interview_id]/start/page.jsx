@@ -25,6 +25,18 @@ function StartInterview() {
         interviewInfo && startCall();
     }, [interviewInfo])
 
+
+//       useEffect(() => {
+//   const getVoices = async () => {
+//     const res = await fetch("api/voices");
+//     const data = await res.json();
+//     console.log("Voices:", data);
+//   };
+//   getVoices();
+// }, []);
+
+    
+
     const startCall = () => {
         let questionList;
         interviewInfo?.interviewData?.questionList.forEach((item, index) => (
@@ -40,7 +52,8 @@ function StartInterview() {
             },
             voice: {
                 provider: "playht",
-                voiceId: "jennifer",
+                // voiceId: "jennifer",
+                voiceId: "snoopdogg",
             },
             model: {
                 provider: "openai",
