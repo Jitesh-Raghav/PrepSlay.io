@@ -31,8 +31,8 @@ const Hero2 = () => {
 
         {/* Hero section */}
         <div className="container mx-auto mt-4 px-4 text-center">
-          <h1 className="mx-auto max-w-4xl text-9xl leading-tight text-white md:text-6xl lg:text-7xl font-aeonik">
-          Recruitment just got automated AF
+          <h1 className="mx-auto max-w-4xl text-5xl leading-tight text-white md:text-6xl lg:text-7xl font-aeonik">
+          Interviews just got automated AF
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-300 font-aeonik">
           Done wasting time on weak intros and half-baked answers? Our AI cuts through the noise, grills and roasts ‘em. Sit back, relax, and pick the survivors.  </p>
@@ -48,14 +48,16 @@ const Hero2 = () => {
           </div>
 
           <div className="relative mx-auto my-20 w-full max-w-6xl">
-            <div className="absolute inset-0 rounded shadow-lg bg-white blur-[10rem] bg-grainy opacity-20" />
+            <div className="absolute inset-0 rounded-xl shadow-2xl bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-3xl" />
 
-            {/* Hero Image - Using AI interview platform related image */}
-            <img
-              src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-              alt="AI Interview Platform Dashboard"
-              className="relative w-full h-auto shadow-md rounded"
-            />
+            {/* Hero Image - Prepslay Dashboard Preview */}
+            <div className="relative bg-gradient-to-r from-blue-500/10 to-purple-500/10 p-1 rounded-xl">
+              <img
+                src="/previeww.png"
+                alt="Prepslay AI Interview Platform Dashboard - Create interviews, manage candidates, and analyze results"
+                className="relative w-full h-auto shadow-2xl rounded-lg border border-white/10 bg-white/5 backdrop-blur-sm"
+              />
+            </div>
           </div>
         </div>
       </div>

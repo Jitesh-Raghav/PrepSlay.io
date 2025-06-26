@@ -52,7 +52,7 @@ export function Navbar() {
   const logoElement = (
     <Link href="/" className="flex items-center gap-2">
       <Mic className="h-6 w-6 text-white" />
-      <span className="text-lg font-bold text-white font-aeonik">Prepslay</span>
+      <span className="text-lg font-bold text-white font-aeonik">PrepSlay</span>
     </Link>
   );
 
@@ -87,7 +87,7 @@ export function Navbar() {
   );
 
   return (
-    <header className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-20
+    <header className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-1000
                        flex flex-col items-center
                        pl-6 pr-6 py-3 backdrop-blur-sm
                        ${headerShapeClass}

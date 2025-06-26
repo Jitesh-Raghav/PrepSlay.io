@@ -13,7 +13,7 @@ function Feature() {
             <h2 className="text-3xl md:text-5xl tracking-tighter lg:max-w-xl font-regular text-white font-aeonik">
               Streamline Your Hiring Process
             </h2>
-            <p className="text-lg max-w-xl lg:max-w-xl leading-relaxed tracking-tight text-gray-300">
+            <p className="text-xl max-w-xl lg:max-w-xl leading-relaxed tracking-tight text-gray-300">
               Transform your recruitment with AI-powered interview technology that saves time and improves candidate assessment.
             </p>
           </div>
@@ -22,8 +22,8 @@ function Feature() {
               <div className="flex flex-row gap-6 w-full items-start">
                 <Check className="w-4 h-4 mt-2 text-blue-400" />
                 <div className="flex flex-col gap-1">
-                  <p className="text-white font-medium">AI Voice Interviews</p>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-white font-medium text-lg">AI Voice Interviews</p>
+                  <p className="text-gray-400 text-lg">
                     Conduct natural conversations with advanced AI voice models that understand context and nuance.
                   </p>
                 </div>
@@ -31,8 +31,8 @@ function Feature() {
               <div className="flex flex-row gap-6 items-start">
                 <Check className="w-4 h-4 mt-2 text-blue-400" />
                 <div className="flex flex-col gap-1">
-                  <p className="text-white font-medium">Real-time Analytics</p>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-white font-medium text-lg">Real-time Analytics</p>
+                  <p className="text-gray-400 text-lg">
                     Get instant insights and detailed analytics on candidate performance and interview quality.
                   </p>
                 </div>
@@ -40,8 +40,8 @@ function Feature() {
               <div className="flex flex-row gap-6 items-start">
                 <Check className="w-4 h-4 mt-2 text-blue-400" />
                 <div className="flex flex-col gap-1">
-                  <p className="text-white font-medium">Bias-Free Assessment</p>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-white font-medium text-lg">Bias-Free Assessment</p>
+                  <p className="text-gray-400 text-lg">
                     Standardized interviews eliminate unconscious bias and ensure fair candidate evaluation.
                   </p>
                 </div>
@@ -49,8 +49,8 @@ function Feature() {
               <div className="flex flex-row gap-6 w-full items-start">
                 <Check className="w-4 h-4 mt-2 text-blue-400" />
                 <div className="flex flex-col gap-1">
-                  <p className="text-white font-medium">Easy Integration</p>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-white font-medium text-lg">Easy Integration</p>
+                  <p className="text-gray-400 text-lg">
                     Seamlessly integrate with your existing HR workflow and applicant tracking systems.
                   </p>
                 </div>
@@ -58,8 +58,8 @@ function Feature() {
               <div className="flex flex-row gap-6 items-start">
                 <Check className="w-4 h-4 mt-2 text-blue-400" />
                 <div className="flex flex-col gap-1">
-                  <p className="text-white font-medium">24/7 Availability</p>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-white font-medium text-lg">24/7 Availability</p>
+                  <p className="text-gray-400 text-lg">
                     Candidates can complete interviews anytime, anywhere, improving the recruitment experience.
                   </p>
                 </div>
@@ -67,8 +67,8 @@ function Feature() {
               <div className="flex flex-row gap-6 items-start">
                 <Check className="w-4 h-4 mt-2 text-blue-400" />
                 <div className="flex flex-col gap-1">
-                  <p className="text-white font-medium">Scalable Solution</p>
-                  <p className="text-gray-400 text-sm">
+                  <p className="text-white font-medium text-lg">Scalable Solution</p>
+                  <p className="text-gray-400 text-lg">
                     Handle hundreds of interviews simultaneously without compromising on quality or insights.
                   </p>
                 </div>
