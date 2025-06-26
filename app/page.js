@@ -6,7 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useUser } from "./provider";
-import HeroVideoDialog from "@/components/magicui/hero-video-dialog";
+import { Hero2 } from "@/components/ui/hero-2-1";
+import { Feature } from "@/components/ui/feature-with-advantages";
+import { Component as PricingSection } from "@/components/ui/gradient-pricing";
+import Footer from "@/components/ui/animated-footer";
+import { Github, Twitter, Linkedin } from "lucide-react";
 
 export default function Home() {
   const { user } = useUser();
@@ -14,206 +18,114 @@ export default function Home() {
 
   return (
     <div>
-      <header className="border-b w-full">
-        <div className=" px-10 flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Image src={'/logo.png'} alt="logo" width={140} height={200} />
-          </div>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="#features" className="text-sm font-medium hover:underline">
-              Features
-            </Link>
-            <Link href="#how-it-works" className="text-sm font-medium hover:underline">
-              How It Works
-            </Link>
-            <Link href="#pricing" className="text-sm font-medium hover:underline">
-              Pricing
-            </Link>
-          </nav>
-          <div>
-
-            <Link href={'/dashboard'}>
-              <Button>Dashboard</Button>
-            </Link>
-            {/* } */}
-          </div>
-        </div>
-      </header>
+      {/* New Hero Section */}
+      <Hero2 />
 
       <main className="flex-1 items-center justify-center">
-        {/* Hero Section */}
-        <section className="py-20 flex items-center justify-center w-full md:py-28 bg-gradient-to-b from-blue-50 to-white">
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
-              <div className="flex flex-col justify-center space-y-4">
-                <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                    AI-Powered <span className="text-primary"> Interview Assistant </span> for Modern Recruiters
-                  </h1>
-                  <p className="text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                    Let our AI voice agent conduct candidate interviews while you focus on finding the perfect match.
-                    Save time, reduce bias, and improve your hiring process.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Button size="lg" className="bg-primary hover:bg-blue-700">
-                    Create Interview <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                  <Button size="lg" variant="outline">
-                    Watch Demo
-                  </Button>
-                </div>
-              </div>
-              <div className="mx-auto lg:mx-0 relative">
-                <div className="relative h-[350px] w-full overflow-hidden rounded-xl bg-gray-100 shadow-lg">
-                  <div className="relative">
-                    <HeroVideoDialog
-                      className="block dark:hidden"
-                      animationStyle="top-in-bottom-out"
-                      videoSrc="https://www.youtube.com/embed/zcYM_Gqoph4"
-                      thumbnailSrc="/home.png"
-                      thumbnailAlt="Hero Video"
-                    />
-                    <HeroVideoDialog
-                      className="hidden dark:block"
-                      animationStyle="top-in-bottom-out"
-                      videoSrc="https://www.youtube.com/embed/zcYM_Gqoph4"
-                      thumbnailSrc="/home.png"
-                      thumbnailAlt="Hero Video"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+
 
         {/* Features Section */}
-        <section id="features" className="py-16 md:py-24 flex items-center justify-center">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Streamline Your Hiring Process</h2>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed">
-                  AiCruiter helps you save time and find better candidates with our advanced AI interview technology.
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3 md:gap-8 mt-12">
-              <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm">
-                <Clock className="h-12 w-12 text-primary" />
-                <h3 className="text-xl font-bold">Save Time</h3>
-                <p className="text-center text-gray-500">
-                  Automate initial screening interviews and focus on final candidates.
-                </p>
-              </div>
-              <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm">
-                <BarChart3 className="h-12 w-12 text-primary" />
-                <h3 className="text-xl font-bold">Data-Driven Insights</h3>
-                <p className="text-center text-gray-500">
-                  Get detailed analytics and candidate comparisons based on interview responses.
-                </p>
-              </div>
-              <div className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm">
-                <Users className="h-12 w-12 text-primary" />
-                <h3 className="text-xl font-bold">Reduce Bias</h3>
-                <p className="text-center text-gray-500">
-                  Standardized interviews help eliminate unconscious bias in the hiring process.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        <Feature />
 
         {/* How It Works Section */}
-        <section id="how-it-works" className="flex items-center justify-center py-16 md:py-24 bg-gray-50">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">How AiCruiter Works</h2>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed">
-                  Three simple steps to transform your recruitment process
+        <section id="how-it-works" className="w-full min-h-screen flex items-center justify-center py-20 bg-black text-white">
+          <div className="w-full px-6 md:px-12">
+            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
+              <div className="space-y-4">
+                <h2 className="text-4xl font-bold tracking-tighter md:text-5xl lg:text-6xl">How Prepslay Works</h2>
+                <p className="mx-auto max-w-[700px] text-gray-300 md:text-xl/relaxed">
+                  Three simple steps to transform your recruitment process with AI
                 </p>
               </div>
             </div>
-            <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-3 mt-12">
-              <div className="flex flex-col items-center space-y-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-100 text-blue-900">
-                  <span className="text-xl font-bold">1</span>
+            <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 md:grid-cols-3">
+              <div className="flex flex-col items-center space-y-6 p-8 rounded-2xl bg-gray-900 border border-gray-800 hover:border-gray-700 transition-all duration-300">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-purple-600 text-white">
+                  <span className="text-2xl font-bold">1</span>
                 </div>
-                <h3 className="text-xl font-bold">Create Interview</h3>
-                <p className="text-center text-gray-500">
-                  Set up your job requirements and customize interview questions.
+                <h3 className="text-2xl font-bold text-white">Create Interview</h3>
+                <p className="text-center text-gray-300 text-lg">
+                  Set up your job requirements and customize AI interview questions with our intuitive interface.
                 </p>
               </div>
-              <div className="flex flex-col items-center space-y-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-100 text-blue-900">
-                  <span className="text-xl font-bold">2</span>
+              <div className="flex flex-col items-center space-y-6 p-8 rounded-2xl bg-gray-900 border border-gray-800 hover:border-gray-700 transition-all duration-300">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 text-white">
+                  <span className="text-2xl font-bold">2</span>
                 </div>
-                <h3 className="text-xl font-bold">Share with Candidates</h3>
-                <p className="text-center text-gray-500">
-                  Send interview links to candidates to complete at their convenience.
+                <h3 className="text-2xl font-bold text-white">Share with Candidates</h3>
+                <p className="text-center text-gray-300 text-lg">
+                  Send interview links to candidates to complete at their convenience with our AI voice agent.
                 </p>
               </div>
-              <div className="flex flex-col items-center space-y-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-100 text-blue-900">
-                  <span className="text-xl font-bold">3</span>
+              <div className="flex flex-col items-center space-y-6 p-8 rounded-2xl bg-gray-900 border border-gray-800 hover:border-gray-700 transition-all duration-300">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-red-500 text-white">
+                  <span className="text-2xl font-bold">3</span>
                 </div>
-                <h3 className="text-xl font-bold">Review Results</h3>
-                <p className="text-center text-gray-500">
-                  Get AI-analyzed results, transcripts, and candidate comparisons.
+                <h3 className="text-2xl font-bold text-white">Review Results</h3>
+                <p className="text-center text-gray-300 text-lg">
+                  Get AI-analyzed results, detailed transcripts, and comprehensive candidate comparisons.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
+        {/* Pricing Section */}
+        <PricingSection />
+
         {/* CTA Section */}
-        <section className="py-16 flex items-center justify-center md:py-24">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">
+        <section className="w-full min-h-screen flex items-center justify-center py-20 bg-black text-white">
+          <div className="w-full px-6 md:px-12">
+            <div className="flex flex-col items-center justify-center space-y-8 text-center">
+              <div className="space-y-6">
+                <h2 className="text-4xl font-bold tracking-tighter md:text-5xl lg:text-6xl">
                   Ready to Transform Your Hiring Process?
                 </h2>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed">
-                  Join hundreds of companies already using AiCruiter to find the best talent.
+                <p className="mx-auto max-w-[700px] text-gray-300 md:text-xl/relaxed">
+                  Join hundreds of companies already using Prepslay to find the best talent with AI-powered interviews.
                 </p>
               </div>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Button size="lg" className="bg-primary hover:bg-blue-700">
-                  Get Started for Free
-                </Button>
-                <Button size="lg" variant="outline">
+              <div className="flex flex-col gap-4 min-[400px]:flex-row min-[400px]:gap-6 mt-8">
+                <Link href="/dashboard/create-interview">
+                  <button className="h-14 rounded-full bg-white px-8 text-lg font-medium text-black hover:bg-gray-100 transition-colors shadow-xl">
+                    Get Started for Free <ArrowRight className="ml-2 h-5 w-5 inline" />
+                  </button>
+                </Link>
+                <button className="h-14 rounded-full border border-gray-600 px-8 text-lg font-medium text-white hover:bg-white/10 transition-colors">
                   Schedule a Demo
-                </Button>
+                </button>
+              </div>
+              
+              {/* Badge */}
+              <div className="mt-12 flex max-w-fit items-center justify-center space-x-2 rounded-full bg-white/10 px-6 py-3 backdrop-blur-sm">
+                <span className="text-sm font-medium text-white">
+                   Start your free trial today
+                </span>
+                <ArrowRight className="h-4 w-4 text-white" />
               </div>
             </div>
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t flex items-center justify-center bg-gray-50">
-        <div className="container flex flex-col gap-6 py-8 md:flex-row md:items-center md:justify-between md:py-12">
-          <div className="flex items-center gap-2">
-            <Mic className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">AiCruiter</span>
-          </div>
-          <nav className="flex flex-wrap gap-4 md:gap-6">
-            <Link href="#" className="text-sm hover:underline">
-              Terms
-            </Link>
-            <Link href="#" className="text-sm hover:underline">
-              Privacy
-            </Link>
-            <Link href="#" className="text-sm hover:underline">
-              Contact
-            </Link>
-          </nav>
-          <div className="text-sm text-gray-500">© 2025 AiCruiter. All rights reserved.</div>
-        </div>
-      </footer>
+      {/* Animated Footer */}
+      <Footer
+        leftLinks={[
+          { href: "/terms", label: "Terms & Policies" },
+          { href: "/privacy", label: "Privacy Policy" },
+          { href: "/contact", label: "Contact Us" },
+          { href: "/help", label: "Help Center" },
+        ]}
+        rightLinks={[
+          { href: "/about", label: "About Prepslay" },
+          { href: "/careers", label: "Careers" },
+          { href: "https://twitter.com/okayjitesh", label: "Twitter", icon: Twitter },
+          { href: "https://github.com/Jitesh-Raghav", label: "GitHub", icon: Github },
+          { href: "https://linkedin.com/in/jitesh-raghav", label: "LinkedIn", icon: Linkedin },
+        ]}
+        copyrightText="© 2025 Prepslay. All rights reserved."
+        barCount={23}
+      />
 
     </div>
   );
