@@ -16,16 +16,16 @@ export async function POST(req) {
 
     try {
         const openai = new OpenAI({
-            baseURL: "https://openrouter.ai/api/v1",
+            baseURL: "https://openrouter.ai/api/v1",    //openrouter api key used for this
             apiKey: process.env.OPENROUTER_API_KEY,
         })
         const completion = await openai.chat.completions.create({
-            model: "google/gemini-flash-1.5",
+            model: "google/gemini-2.5-flash-lite",
             messages: [
                 { role: "user", content: FINAL_PROMPT }
             ],
-
-        })
+            max_tokens: 2000
+        });
 
         return NextResponse.json(completion.choices[0].message)
     }

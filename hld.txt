@@ -1,0 +1,396 @@
+# PrepSlay.io - High-Level Design Document
+
+## 🎯 Project Overview
+
+**PrepSlay.io** is a modern SaaS platform that automates the interview process using AI voice technology. It allows recruiters to create AI-conducted interviews that candidates can complete remotely, with automatic scoring and feedback generation.
+
+## 🏗️ High-Level Architecture
+
+### Frontend Layer
+- **Landing Page**: Marketing site with features, pricing, and sign-up
+- **Authentication**: Google OAuth integration via Supabase
+- **Dashboard**: Main application interface for recruiters
+- **Interview Creation**: Multi-step wizard for creating AI interviews
+- **Interview Management**: View and manage created interviews
+- **Analytics & Reports**: Candidate performance analysis
+- **Billing**: Credit-based payment system
+
+### API Layer
+- **AI Model API**: Question generation using OpenRouter/Gemini
+- **AI Feedback API**: Post-interview analysis and scoring
+- **Voice API**: Integration with PlayHT for voice synthesis
+- **Payment API**: PayPal integration for credit purchases
+
+### Database Layer (Supabase)
+- **Users Table**: User profiles, authentication, and credits
+- **Interviews Table**: Interview configurations and metadata
+- **Feedback Table**: Candidate responses and AI-generated feedback
+
+### Voice AI Layer (VAPI Platform)
+- **Speech Recognition**: Deepgram Nova-2 for real-time transcription
+- **Voice Synthesis**: PlayHT for AI voice generation
+- **Conversation Management**: Real-time interview orchestration
+
+## 🛠️ Technology Stack
+
+### Frontend Framework
+- **Next.js 15.2.4** with App Router
+- **React 19** with server-side rendering
+- **TypeScript/JavaScript** (mixed codebase)
+- **Tailwind CSS 4** for styling
+- **Framer Motion** for animations
+- **shadcn/ui** component library
+
+### Database & Backend
+- **Supabase** for database, authentication, and real-time features
+- **PostgreSQL** (via Supabase)
+- **Next.js API Routes** for server-side logic
+
+### AI & Voice Integration
+- **VAPI** - Voice AI platform for real-time conversations
+- **OpenRouter** - AI model routing (using Gemini Flash 1.5)
+- **Deepgram Nova-2** - Speech-to-text transcription
+- **PlayHT Jennifer** - Text-to-speech synthesis
+
+### Payment & Billing
+- **PayPal** integration for credit purchases
+- Credit-based pricing model
+
+## 📊 Database Schema
+
+### Users Table
+```sql
+- id (primary key)
+- name (from Google OAuth)
+- email (unique identifier)
+- picture (profile image URL)
+- credits (interview credits remaining)
+- created_at
+- updated_at
+```
+
+### Interviews Table
+```sql
+- id (primary key)
+- interview_id (UUID, shareable identifier)
+- userEmail (foreign key to Users)
+- jobPosition
+- jobDescription
+- duration
+- type (JSON array of interview types)
+- questionList (JSON array of AI-generated questions)
+- created_at
+```
+
+### interview-feedback Table
+```sql
+- id (primary key)
+- interview_id (foreign key)
+- userName (candidate name)
+- userEmail (candidate email)
+- feedback (JSON object with ratings and analysis)
+- recommended (boolean)
+- created_at
+```
+
+## 🔄 Core User Flows
+
+### 1. Recruiter Flow
+1. **Authentication**: Google OAuth sign-in
+2. **Interview Creation**: 
+   - Enter job details (position, description, duration, type)
+   - AI generates tailored questions using Gemini
+   - Creates shareable interview link
+3. **Interview Management**: View all interviews, candidate responses
+4. **Analytics**: Review AI-generated feedback and ratings
+
+### 2. Candidate Flow
+1. **Access Interview**: Click shared link
+2. **Registration**: Enter name and email
+3. **Voice Interview**: Real-time AI conversation via VAPI
+4. **Completion**: Automatic feedback generation and storage
+
+### 3. Billing Flow
+- Credit-based system (20, 50, 120 credits packages)
+- PayPal integration for payments
+- 1 credit = 1 interview creation
+
+## 🧠 AI Integration Architecture
+
+### Question Generation
+- Uses **OpenRouter + Gemini Flash 1.5**
+- Structured prompts with job details
+- Returns JSON-formatted questions categorized by type
+
+### Voice Interview Engine
+- **VAPI Platform** orchestrates the entire voice conversation
+- **Deepgram Nova-2** for speech recognition
+- **PlayHT Jennifer voice** for speech synthesis
+- **GPT-4** for conversation intelligence and responses
+
+### Feedback Analysis
+- Post-interview conversation analysis
+- AI generates structured feedback with ratings
+- Categories: Technical Skills, Communication, Problem Solving, Experience
+- Boolean recommendation with explanatory message
+
+## 📁 Project Structure
+
+```
+📦 PrepSlay.io/
+├── 🎨 app/                          # Next.js App Router
+│   ├── (main)/                      # Protected dashboard routes
+│   │   ├── dashboard/               # Main dashboard
+│   │   ├── create-interview/        # Interview creation wizard
+│   │   ├── scheduled-interview/     # Interview management
+│   │   ├── all-interview/           # Interview history
+│   │   ├── billing/                 # Payment management
+│   │   └── settings/                # User settings
+│   ├── api/                         # API endpoints
+│   │   ├── ai-model/                # Question generation
+│   │   ├── ai-feedback/             # Interview analysis
+│   │   └── voices/                  # Voice management
+│   ├── auth/                        # Authentication pages
+│   ├── interview/                   # Candidate-facing interview
+│   │   └── [interview_id]/          # Dynamic interview pages
+│   └── globals.css                  # Global styles
+├── 🧩 components/                   # Reusable UI components
+│   ├── ui/                          # shadcn/ui components
+│   └── magicui/                     # Custom UI components
+├── 🔧 services/                     # External service integrations
+│   ├── supabaseClient.js            # Database client
+│   └── Constants.jsx                # App constants & prompts
+├── 🎯 context/                      # React context providers
+├── 🔗 hooks/                        # Custom React hooks
+└── 📋 lib/                          # Utility functions
+```
+
+## 🎤 Deepgram Integration Details
+
+### Purpose
+Deepgram is used as the **speech-to-text (STT) transcription service** in the voice AI interview system.
+
+### Configuration
+```javascript
+transcriber: {
+    provider: "deepgram",
+    model: "nova-2",
+    language: "en-US",
+}
+```
+
+### Functionality
+1. **Real-time Speech Recognition**: Converts candidate's spoken responses into text
+2. **Interview Flow Integration**: Transcribed text is sent to GPT-4 for analysis
+3. **VAPI Platform Integration**: Coordinates with PlayHT and OpenAI for complete voice pipeline
+
+### Voice Pipeline
+```
+Candidate Speaks → Deepgram Nova-2 → Text → GPT-4 → Response → PlayHT → AI Voice
+```
+
+### Benefits
+- **Interview-Specific Optimization**: Nova-2 trained on conversational speech
+- **Technical Term Recognition**: Better understanding of job-specific terminology
+- **Real-time Performance**: Low latency for natural conversation flow
+- **Accent Flexibility**: Handles various accents and speaking styles
+- **Reliability**: Enterprise-grade service for professional contexts
+
+## 🔐 Security & Authentication
+
+- **Google OAuth** via Supabase Auth
+- **Row Level Security** (RLS) in Supabase
+- **Environment variables** for API keys
+- **Client-side route protection** with user context
+
+## 🚀 Key Features
+
+### AI-Powered Question Generation
+- Contextual questions based on job requirements
+- Multiple interview types (Technical, Behavioral, Experience, Problem Solving, Leadership)
+- Duration-aware question optimization
+
+### Voice AI Interview Conductor
+- Natural conversation flow
+- Real-time speech processing
+- Adaptive questioning based on responses
+- Professional voice synthesis
+
+### Comprehensive Analytics
+- Automated candidate scoring
+- Detailed performance metrics
+- Bias-free evaluation criteria
+- Exportable reports
+
+### Scalable Architecture
+- Credit-based monetization
+- Multi-tenant SaaS design
+- Real-time data synchronization
+- Mobile-responsive interface
+
+## 💰 Business Model
+
+**Freemium + Credit System**:
+- Basic: $5 for 20 interviews
+- Standard: $12 for 50 interviews  
+- Pro: $25 for 120 interviews
+- Enterprise: Custom pricing
+
+## 🔄 Development Workflow
+
+- **Framework**: Next.js with App Router
+- **Deployment**: Vercel (inferred from metadata)
+- **Version Control**: Git-based
+- **Styling**: Tailwind CSS with component library
+- **State Management**: React Context + Local State
+
+## 🎯 Interview Types Supported
+
+1. **Technical**: Programming, system design, technical problem-solving
+2. **Behavioral**: Soft skills, teamwork, communication
+3. **Experience**: Past work experience, project management
+4. **Problem Solving**: Analytical thinking, case studies
+5. **Leadership**: Management skills, decision-making
+
+## 📈 Analytics & Feedback Structure
+
+### AI-Generated Feedback Format
+```json
+{
+    "feedback": {
+        "rating": {
+            "technicalSkills": <score>,
+            "communication": <score>,
+            "problemSolving": <score>,
+            "experience": <score>,
+            "totalRating": <score>
+        },
+        "summary": "<3-line summary>",
+        "recommendation": true|false,
+        "recommendationMsg": "<one-line message>"
+    }
+}
+```
+
+## 🌐 Environment Variables Required
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `OPENROUTER_API_KEY`
+- `NEXT_PUBLIC_VAPI_PUBLIC_KEY`
+- `NEXT_PUBLIC_PAYPAL_CLIENT_ID`
+- `NEXT_PUBLIC_HOST_URL`
+
+## 🔧 API Endpoints
+
+### `/api/ai-model`
+- **Purpose**: Generate interview questions
+- **Method**: POST
+- **Input**: jobPosition, jobDescription, duration, type
+- **Output**: JSON array of questions
+
+### `/api/ai-feedback`
+- **Purpose**: Analyze interview conversation
+- **Method**: POST
+- **Input**: conversation (JSON string)
+- **Output**: Structured feedback with ratings
+
+### `/api/voices`
+- **Purpose**: Voice management (currently commented out)
+- **Method**: GET
+- **Output**: Available voice options
+
+## 📱 User Interface Features
+
+### Landing Page
+- Hero section with value proposition
+- Feature showcase with animated components
+- Pricing tiers with gradient design
+- Call-to-action buttons
+
+### Dashboard
+- Welcome container with user info
+- Quick action cards for interview creation
+- Recent interviews list
+- Credit balance display
+
+### Interview Creation
+- Multi-step wizard (3 steps)
+- Progress indicator
+- Form validation
+- AI question generation
+- Shareable link creation
+
+### Interview Interface
+- Real-time voice conversation
+- Visual indicators for active speaker
+- Timer component
+- End interview controls
+
+## 🎨 UI/UX Design System
+
+### Color Scheme
+- Primary: Blue (#3b82f6)
+- Secondary: Gray tones
+- Background: Black/White theme
+- Accents: Purple, Green, Orange gradients
+
+### Typography
+- Font: Geist (Vercel's font family)
+- Headings: Bold, large scale
+- Body: Regular weight, readable
+
+### Components
+- **shadcn/ui**: Base component library
+- **Framer Motion**: Smooth animations
+- **Custom Components**: Specialized interview components
+- **Responsive Design**: Mobile-first approach
+
+## 🔄 Data Flow
+
+1. **User Authentication** → Supabase Auth
+2. **Interview Creation** → AI Question Generation → Database Storage
+3. **Candidate Access** → Interview Link → Voice Setup
+4. **Voice Interview** → Deepgram → GPT-4 → PlayHT → Database
+5. **Feedback Generation** → AI Analysis → Database Storage
+6. **Analytics** → Data Retrieval → UI Display
+
+## 🚀 Deployment & Infrastructure
+
+### Hosting
+- **Vercel**: Next.js deployment platform
+- **Supabase**: Database and authentication
+- **CDN**: Static asset delivery
+
+### Environment Management
+- **Development**: Local environment
+- **Production**: Vercel environment variables
+- **Staging**: Separate deployment (if needed)
+
+### Monitoring
+- **Error Tracking**: Built-in Next.js error handling
+- **Performance**: Vercel analytics
+- **Database**: Supabase dashboard
+
+## 📋 Future Enhancements
+
+### Potential Features
+- Multi-language support
+- Video interview capabilities
+- Advanced analytics dashboard
+- Team collaboration features
+- Integration with ATS systems
+- Custom branding options
+- API for third-party integrations
+
+### Technical Improvements
+- TypeScript migration
+- Performance optimization
+- Enhanced error handling
+- Automated testing
+- CI/CD pipeline
+- Monitoring and logging
+
+---
+
+*This document provides a comprehensive overview of the PrepSlay.io architecture, implementation details, and system design. It serves as a reference for understanding the project structure and making informed decisions about future development.* 

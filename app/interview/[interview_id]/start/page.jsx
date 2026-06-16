@@ -51,9 +51,8 @@ function StartInterview() {
                 language: "en-US",
             },
             voice: {
-                provider: "playht",
-                 voiceId: "jennifer",
-                //voiceId: "snoopdogg",
+                provider: "vapi",
+                voiceId: "Elliot"
             },
             model: {
                 provider: "openai",

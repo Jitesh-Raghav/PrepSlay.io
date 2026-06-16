@@ -73,7 +73,7 @@ const InterviewComplete = () => {
 
                 <p className="text-lg text-gray-400 text-center">
 
-                    Thank you for participating in the AI-driven interview with Alcruiter
+                    Thank you for participating in the AI-driven interview with Prepslay
 
                 </p>
 
@@ -200,7 +200,7 @@ const InterviewComplete = () => {
 
             <footer className="bg-midnightLighter text-gray-400 text-center py-4">
 
-                <p>&copy; 2025 Alcruiter. All rights reserved.</p>
+                <p>&copy; 2025 Prepslay. All rights reserved.</p>
 
             </footer>
 
