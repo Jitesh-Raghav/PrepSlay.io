@@ -2,7 +2,7 @@
 import { InterviewDataContext } from '@/context/InterviewDataContext'
 import { Loader2Icon, Mic, Phone, Timer } from 'lucide-react';
 import Image from 'next/image';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Vapi from "@vapi-ai/web";
 import AlertConfirmation from './_components/AlertConfirmation';
 import { toast } from 'sonner';
@@ -10,17 +10,21 @@ import TimerComponent from './_components/TimerComponent';
 import axios from 'axios';
 import { supabase } from '@/services/supabaseClient';
 import { useParams, useRouter } from 'next/navigation';
+import { getConversationText, normalizeFeedbackPayload } from '@/lib/interviewFeedback';
 
 
 function StartInterview() {
     const { interviewInfo, setInterviewInfo } = useContext(InterviewDataContext);
     const vapi = new Vapi(process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY);
     const [activeUser, setActiveUser] = useState(false);
-    const [conversation, setConversation] = useState();
+    const [conversation, setConversation] = useState('');
+    const conversationRef = useRef('');
     const { interview_id } = useParams();
     const router = useRouter();
-    const [loading, setLoading] = useState();
+    const [loading, setLoading] = useState(false);
     const [callEnd, setCallEnd] = useState(false);
+    const finalizingRef = useRef(false);
+
     useEffect(() => {
         interviewInfo && startCall();
     }, [interviewInfo])
@@ -126,10 +130,10 @@ Key Guidelines:
     useEffect(() => {
         const handleMessage = (message) => {
             console.log('Message:', message);
-            if (message?.conversation) {
-                const convoString = JSON.stringify(message.conversation);
-                console.log('Conversation string:', convoString);
-                setConversation(convoString);
+            const nextConversation = getConversationText(message?.conversation ?? message);
+            if (nextConversation) {
+                conversationRef.current = nextConversation;
+                setConversation(nextConversation);
             }
         };
 
@@ -164,37 +168,58 @@ Key Guidelines:
     }, []);
 
     const GenerateFeedback = async () => {
+        if (finalizingRef.current) return;
+        finalizingRef.current = true;
         setLoading(true);
-        console.log("conversation", conversation)
 
-        if (!conversation) {
+        const finalConversation = conversationRef.current || conversation;
+        console.log("conversation", finalConversation)
+
+        if (!finalConversation || !finalConversation.trim()) {
+            toast('No interview transcript was captured, so no report could be generated.');
+            setLoading(false);
+            finalizingRef.current = false;
             return;
         }
-        const result = await axios.post('/api/ai-feedback', {
-            conversation: conversation
-        });
 
-        console.log(result?.data);
-        const Content = result.data.content;
-        const FINAL_CONTENT = Content.replace('```json', '').replace('```', '')
-        console.log(FINAL_CONTENT);
-        // Save to Database
+        try {
+            const result = await axios.post('/api/ai-feedback', {
+                conversation: finalConversation
+            });
 
-        const { data, error } = await supabase
-            .from('interview-feedback')
-            .insert([
-                {
-                    userName: interviewInfo?.userName,
-                    userEmail: interviewInfo?.userEmail,
-                    interview_id: interview_id,
-                    feedback: JSON.parse(FINAL_CONTENT),
-                    recommended: false
-                },
-            ])
-            .select();
-        console.log(data);
-        router.replace('/interview/' + interview_id + "/completed");
-        setLoading(false);
+            const payload = normalizeFeedbackPayload(result?.data);
+            const feedback = payload?.feedback ?? {};
+
+            const { data, error } = await supabase
+                .from('interview-feedback')
+                .insert([
+                    {
+                        userName: interviewInfo?.userName,
+                        userEmail: interviewInfo?.userEmail,
+                        interview_id: interview_id,
+                        feedback,
+                        recommended: Boolean(feedback?.recommendation)
+                    },
+                ])
+                .select();
+
+            if (error) {
+                console.error(error);
+                toast('Failed to save the interview report.');
+                setLoading(false);
+                finalizingRef.current = false;
+                return;
+            }
+
+            console.log(data);
+            router.replace('/interview/' + interview_id + "/completed");
+        } catch (e) {
+            console.error('GenerateFeedback failed:', e);
+            toast('The interview report could not be generated right now.');
+        } finally {
+            setLoading(false);
+            finalizingRef.current = false;
+        }
     }
 
     return (

@@ -12,6 +12,8 @@ import { Progress } from '@/components/ui/progress'
 
 function CandidateFeedbackDialog({ candidate }) {
     const feedback = candidate?.feedback?.feedback;
+    const summaryList = feedback?.summary ?? feedback?.summery ?? [];
+    const experienceValue = feedback?.rating?.experience ?? feedback?.rating?.experince ?? 0;
     console.log(feedback)
     return (
         <Dialog >
@@ -51,16 +53,16 @@ function CandidateFeedbackDialog({ candidate }) {
                                         <Progress value={feedback?.rating?.problemSolving * 10} className='mt-1' />
                                     </div>
                                     <div>
-                                        <h2 className='flex justify-between'>Experince <span>{feedback?.rating?.experience}/10</span></h2>
-                                        <Progress value={feedback?.rating?.experience * 10} className='mt-1' />
+                                        <h2 className='flex justify-between'>Experience <span>{experienceValue}/10</span></h2>
+                                        <Progress value={experienceValue * 10} className='mt-1' />
                                     </div>
                                 </div>
                             </div>
                             <div className='mt-5'>
                                 <h2 className='font-bold'>Performance Summery</h2>
                                 <div className='p-5 bg-secondary my-3 rounded-md'>
-                                    {feedback?.summery?.map((summery, index) => (
-                                        <p key={index}>{summery}</p>
+                                    {summaryList.map((item, index) => (
+                                        <p key={index}>{item}</p>
                                     ))}
                                 </div>
                             </div>
