@@ -1,28 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs>
-  <linearGradient id="sbase" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#2b3bff"/><stop offset=".55" stop-color="#4f46e5"/><stop offset="1" stop-color="#6d28d9"/>
+  <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#3341ff"/><stop offset=".5" stop-color="#4c35e0"/><stop offset="1" stop-color="#2a1a8f"/>
   </linearGradient>
-  <radialGradient id="sblue" cx=".18" cy=".12" r=".65"><stop offset="0" stop-color="#1d2bff"/><stop offset="1" stop-color="#1d2bff" stop-opacity="0"/></radialGradient>
-  <radialGradient id="sviolet" cx=".08" cy=".98" r=".75"><stop offset="0" stop-color="#c084fc"/><stop offset=".45" stop-color="#a855f7" stop-opacity=".85"/><stop offset="1" stop-color="#a855f7" stop-opacity="0"/></radialGradient>
-  <radialGradient id="sgreen" cx=".98" cy=".92" r=".7"><stop offset="0" stop-color="#4ade80"/><stop offset=".5" stop-color="#34d399" stop-opacity=".75"/><stop offset="1" stop-color="#34d399" stop-opacity="0"/></radialGradient>
-  <radialGradient id="scyan" cx="1" cy=".42" r=".5"><stop offset="0" stop-color="#22d3ee" stop-opacity=".8"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
-  <linearGradient id="sgloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset=".72" stop-color="#fff" stop-opacity="0"/></linearGradient>
-  <linearGradient id="sshade" x1="0" y1="0" x2="0" y2="1"><stop offset=".6" stop-color="#0b0a2a" stop-opacity="0"/><stop offset="1" stop-color="#0b0a2a" stop-opacity=".22"/></linearGradient>
-  <filter id="sdrop" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#1e1b4b" flood-opacity=".38"/></filter>
-  <clipPath id="sclip"><rect width="512" height="512" rx="120"/></clipPath>
+  <radialGradient id="violet" cx=".05" cy="1" r=".75"><stop offset="0" stop-color="#c084fc"/><stop offset=".5" stop-color="#a855f7" stop-opacity=".7"/><stop offset="1" stop-color="#a855f7" stop-opacity="0"/></radialGradient>
+  <radialGradient id="green" cx="1" cy=".95" r=".7"><stop offset="0" stop-color="#4ade80"/><stop offset=".45" stop-color="#2dd4bf" stop-opacity=".7"/><stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/></radialGradient>
+  <radialGradient id="cyan" cx="1" cy=".2" r=".55"><stop offset="0" stop-color="#22d3ee" stop-opacity=".75"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+  <radialGradient id="halo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".5" stop-color="#c7d2fe" stop-opacity=".2"/><stop offset="1" stop-color="#c7d2fe" stop-opacity="0"/></radialGradient>
+  <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".38"/><stop offset=".7" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#0b0630" stop-opacity="0"/><stop offset="1" stop-color="#0b0630" stop-opacity=".35"/></linearGradient>
+  <linearGradient id="airi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a5f3fc"/><stop offset=".5" stop-color="#ffffff"/><stop offset="1" stop-color="#f0abfc"/></linearGradient>
+  <linearGradient id="spec" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10"/></filter>
+  <clipPath id="clip"><rect width="512" height="512" rx="120"/></clipPath>
   </defs>
-  <g clip-path="url(#sclip)">
-    <rect width="512" height="512" fill="url(#sbase)"/>
-    <rect width="512" height="512" fill="url(#sblue)"/>
-    <rect width="512" height="512" fill="url(#sviolet)"/>
-    <rect width="512" height="512" fill="url(#sgreen)"/>
-    <rect width="512" height="512" fill="url(#scyan)"/>
-    <rect width="512" height="512" fill="url(#sshade)"/>
-    <ellipse cx="256" cy="18" rx="330" ry="190" fill="url(#sgloss)"/>
+  <g clip-path="url(#clip)">
+    <rect width="512" height="512" fill="url(#base)"/>
+    <rect width="512" height="512" fill="url(#violet)"/>
+    <rect width="512" height="512" fill="url(#green)"/>
+    <rect width="512" height="512" fill="url(#cyan)"/>
+    <rect width="512" height="512" fill="url(#shade)"/>
+    <ellipse cx="256" cy="10" rx="340" ry="200" fill="url(#gloss)"/>
   </g>
-  <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="190" y="72" width="132" height="230" rx="66" fill="#fff" stroke="none"/>
-    <path d="M130 236a126 126 0 0 0 252 0" stroke-width="48"/>
-    <path d="M256 364v74" stroke-width="48"/>
-  </g>
-</svg>
+  
+  <g>
+    <circle cx="256" cy="260" r="195.7" fill="url(#halo)"/>
+    <polygon points="256,54 329.53910524340097,186.46089475659906 462,260 329.53910524340097,333.53910524340097 256,466 182.46089475659906,333.53910524340097 50,260 182.46089475659906,186.46089475659906" transform="translate(13.733333333333333 24.72)" fill="#160c52" opacity=".45" filter="url(#soft)"/>
+    <polygon points="256,54 329.53910524340097,186.46089475659906 462,260 329.53910524340097,333.53910524340097 256,466 182.46089475659906,333.53910524340097 50,260 182.46089475659906,186.46089475659906" transform="translate(1.0986666666666667 1.7853333333333334)" fill="#3b23b8"/><polygon points="256,54 329.53910524340097,186.46089475659906 462,260 329.53910524340097,333.53910524340097 256,466 182.46089475659906,333.53910524340097 50,260 182.46089475659906,186.46089475659906" transform="translate(2.1973333333333334 3.570666666666667)" fill="#3b23b8"/><polygon points="256,54 329.53910524340097,186.46089475659906 462,260 329.53910524340097,333.53910524340097 256,466 182.46089475659906,333.53910524340097 50,260 182.46089475659906,186.46089475659906" transform="translate(3.2960000000000003 5.356000000000001)" fill="#3b23b8"/><polygon points="256,54 329.53910524340097,186.46089475659906 462,260 329.53910524340097,333.53910524340097 256,466 182.46089475659906,333.53910524340097 50,260 182.46089475659906,186.46089475659906" transform="translate(4.394666666666667 7.141333333333334)" fill="#3b23b8"/><polygon points="256,54 329.53910524340097,186.46089475659906 462,260 329.53910524340097,333.53910524340097 256,466 182.46089475659906,333.53910524340097 50,260 182.46089475659906,186.46089475659906" transform="translate(5.493333333333333 8.926666666666666)" fill="#3b23b8"/><polygon points="256,54 329.53910524340097,186.46089475659906 462,260 329.53910524340097,333.53910524340097 256,466 182.46089475659906,333.53910524340097 50,260 182.46089475659906,186.46089475659906" transform="translate(6.5920000000000005 10.712000000000002)" fill="#3b23b8"/><polygon points="256,54 329.53910524340097,186.46089475659906 462,260 329.53910524340097,333.53910524340097 256,466 182.46089475659906,333.53910524340097 50,260 182.46089475659906,186.46089475659906" transform="translate(7.690666666666667 12.497333333333332)" fill="#3b23b8"/><polygon points="256,54 329.53910524340097,186.46089475659906 462,260 329.53910524340097,333.53910524340097 256,466 182.46089475659906,333.53910524340097 50,260 182.46089475659906,186.46089475659906" transform="translate(8.789333333333333 14.282666666666668)" fill="#3b23b8"/><polygon points="256,54 329.53910524340097,186.46089475659906 462,260 329.53910524340097,333.53910524340097 256,466 182.46089475659906,333.53910524340097 50,260 182.46089475659906,186.46089475659906" transform="translate(9.888 16.068)" fill="#2a1691"/>
+    <polygon points="256,54 182.46089475659906,186.46089475659906 256,260" fill="#ffffff"/><polygon points="256,54 329.53910524340097,186.46089475659906 256,260" fill="#e4e6ff"/><polygon points="462,260 329.53910524340097,186.46089475659906 256,260" fill="#c9c6ff"/><polygon points="462,260 329.53910524340097,333.53910524340097 256,260" fill="#8f7df7"/><polygon points="256,466 329.53910524340097,333.53910524340097 256,260" fill="#7a64ee"/><polygon points="256,466 182.46089475659906,333.53910524340097 256,260" fill="#b3a6ff"/><polygon points="50,260 182.46089475659906,333.53910524340097 256,260" fill="#e9e6ff"/><polygon points="50,260 182.46089475659906,186.46089475659906 256,260" fill="#fbfaff"/>
+    <polygon points="256,54 329.53910524340097,186.46089475659906 462,260 329.53910524340097,333.53910524340097 256,466 182.46089475659906,333.53910524340097 50,260 182.46089475659906,186.46089475659906" fill="url(#airi)" opacity=".38" style="mix-blend-mode:multiply"/>
+    <polygon points="256,54 329.53910524340097,186.46089475659906 462,260 329.53910524340097,333.53910524340097 256,466 182.46089475659906,333.53910524340097 50,260 182.46089475659906,186.46089475659906" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="3.433333333333333" stroke-linejoin="round"/>
+    <polygon points="256,54 182.46089475659906,186.46089475659906 256,260" fill="url(#spec)"/>
+  </g></svg>
