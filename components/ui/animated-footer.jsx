@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useRef, useState } from "react";
-import { Mic, Github, Twitter, Linkedin } from "lucide-react";
+import { Mic } from "lucide-react";
+import { auroraAt } from "@/components/ui/aurora-backdrop";
 
 const Footer = ({
   leftLinks,
@@ -69,24 +70,24 @@ const Footer = ({
   return (
     <footer
       ref={footerRef}
-      className="bg-black text-white relative flex flex-col w-full h-full justify-between lg:h-screen select-none"
+      className="bg-[#f5f6fa] text-neutral-900 relative flex flex-col w-full h-full justify-between lg:h-screen select-none"
     >
       <div className="container mx-auto flex flex-col md:flex-row justify-between w-full gap-4 pb-24 pt-8 px-4">
         <div className="space-y-4">
           <div className="flex items-center gap-3 mb-6">
-            <Mic className="h-8 w-8 text-white" />
-            <span className="text-2xl font-bold">Prepslay</span>
+            <Mic className="h-8 w-8 text-neutral-900" />
+            <span className="text-2xl font-bold font-aeonik">Prepslay</span>
           </div>
           <ul className="flex flex-wrap gap-4">
             {leftLinks.map((link, index) => (
               <li key={index}>
-                <a href={link.href} className="text-sm hover:text-blue-400 transition-colors">
+                <a href={link.href} className="text-sm hover:text-indigo-600 transition-colors">
                   {link.label}
                 </a>
               </li>
             ))}
           </ul>
-          <p className="text-sm mt-4 flex items-center gap-x-2 text-gray-300">
+          <p className="text-sm mt-4 flex items-center gap-x-2 text-neutral-500">
             <Mic className="h-4 w-4" />
             {copyrightText}
           </p>
@@ -99,7 +100,7 @@ const Footer = ({
                   href={link.href} 
                   target={link.href.startsWith('http') ? '_blank' : '_self'}
                   rel={link.href.startsWith('http') ? 'noopener noreferrer' : ''}
-                  className="text-sm hover:text-blue-400 transition-colors flex items-center gap-2"
+                  className="text-sm hover:text-indigo-600 transition-colors flex items-center gap-2"
                 >
                   {link.icon && <link.icon className="h-4 w-4" />}
                   {link.label}
@@ -110,7 +111,7 @@ const Footer = ({
           <div className="text-right mt-4">
             <button 
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="text-sm hover:underline inline-flex items-center hover:text-blue-400 transition-colors"
+              className="text-sm hover:underline inline-flex items-center hover:text-indigo-600 transition-colors"
             >
               Back to top ↑
             </button>
@@ -130,7 +131,7 @@ const Footer = ({
               className="wave-segment"
               style={{
                 height: `${index + 1}px`,
-                backgroundColor: "rgb(255, 255, 255)",
+                backgroundColor: auroraAt(barCount > 1 ? index / (barCount - 1) : 0),
                 transition: "transform 0.1s ease",
                 willChange: "transform",
                 marginTop: "-2px",

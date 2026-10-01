@@ -19,7 +19,7 @@ function HandWrittenTitle({
     };
 
     return (
-        <div className="relative w-full py-12 bg-black">
+        <div className="relative w-full py-12 bg-[#f5f6fa]">
             <div className="absolute inset-0">
                 <motion.svg
                     width="100%"
@@ -42,13 +42,13 @@ function HandWrittenTitle({
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         variants={draw}
-                        className="text-white opacity-60"
+                        className="text-neutral-900 opacity-20"
                     />
                 </motion.svg>
             </div>
             <div className="relative text-center z-10 flex flex-col items-center justify-center px-4 md:px-8 p-1">
                 <motion.h1
-                    className="text-6xl md:text-8xl xl:text-9xl tracking-tighter flex items-center gap-2 font-aeonik bg-clip-text text-transparent bg-gradient-to-b from-white via-gray-200 to-gray-500 p-4"
+                    className="text-6xl md:text-8xl xl:text-9xl tracking-tighter flex items-center gap-2 font-aeonik bg-clip-text text-transparent bg-gradient-to-b from-neutral-950 via-neutral-700 to-neutral-400 p-4"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5, duration: 0.8 }}
@@ -57,7 +57,7 @@ function HandWrittenTitle({
                 </motion.h1>
                 {subtitle && (
                     <motion.p
-                        className="text-2xl md:text-3xl xl:text-4xl text-gray-300 mt-6"
+                        className="text-2xl md:text-3xl xl:text-4xl text-neutral-500 mt-6"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 1, duration: 0.8 }}
