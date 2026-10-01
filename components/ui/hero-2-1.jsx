@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Instrument_Serif } from "next/font/google";
+import { instrumentSerif } from "@/lib/fonts";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -29,12 +29,6 @@ import {
   Terminal,
   X,
 } from "lucide-react";
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["italic"],
-});
 
 const navLinks = [
   { label: "Features", href: "#features" },

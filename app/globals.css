@@ -209,9 +209,48 @@
   animation: marquee 40s linear infinite;
 }
 
+/* Landing: aurora blobs */
+@keyframes aurora-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(4%, 6%, 0) scale(1.08); }
+}
+.aurora-blob {
+  animation: aurora-drift 18s ease-in-out infinite;
+}
+.aurora-blob--slow {
+  animation-duration: 26s;
+}
+.aurora-blob--rev {
+  animation-direction: reverse;
+  animation-duration: 22s;
+}
+
+/* Landing: monospace glyph rain */
+@keyframes glyph-fall {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
+@keyframes glyph-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.glyph-fall {
+  animation: glyph-fall 60s linear infinite;
+}
+.glyph-row {
+  animation: glyph-flicker 6s ease-in-out infinite;
+}
+.glyph-mask {
+  mask-image: radial-gradient(ellipse 70% 75% at 40% 45%, black 30%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 75% at 40% 45%, black 30%, transparent 85%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .eq-bar,
-  .animate-marquee {
+  .animate-marquee,
+  .aurora-blob,
+  .glyph-fall,
+  .glyph-row {
     animation: none;
   }
 }
